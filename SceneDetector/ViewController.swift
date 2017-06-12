@@ -87,7 +87,7 @@ extension ViewController {
       
       let topResults = results[..<5]
 
-      // Update UI on main queue
+      // Create a paragraph describing predictions
       let lines = topResults.map({ result -> String in
         let article = self!.vowels.contains(result.identifier.first!) ? "an" : "a"
         let line = "\(Int(result.confidence * 100))% it's \(article) \(result.identifier)"
@@ -95,6 +95,7 @@ extension ViewController {
         return line
       })
       
+      // Update UI on main queue
       DispatchQueue.main.async { [weak self] in
         self?.answerLabel.text = lines.joined(separator: "\n")
       }
